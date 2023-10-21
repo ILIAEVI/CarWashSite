@@ -27,10 +27,10 @@ def book_visit_view(request):
     if request.method == "POST":
         form = BookingForm(request.user, request.POST)
         if form.is_valid():
-            booking_datetime = form.cleaned_data['booking_datetime']
-            booking = Booking(user=request.user)
-            if not CreateVehicle.objects.filter(booking_datetime=booking_datetime).exists():
-                booking.user = request.user
+            booking = form.save(commit=False)
+            booking.user = request.user
+            datetime = form.cleaned_data['datetime']
+            if not Booking.objects.filter(datetime=datetime).exists():
                 booking.save()
                 messages.success(request, 'Successfully booked')
                 return redirect('home')

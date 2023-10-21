@@ -40,7 +40,7 @@ class Booking(models.Model):
         BODY_WASH = "body_wash", _("Body Shampooing and Washing")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    choose_vehicle = models.ForeignKey(CreateVehicle, on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(CreateVehicle, on_delete=models.CASCADE)
     service = models.CharField(
         max_length=255,
         choices=CarWashServiceChoices.choices,
@@ -48,4 +48,4 @@ class Booking(models.Model):
         help_text=_("Choice Service")
 
     )
-    booking_datetime = models.DateTimeField(help_text=_("Choose the date and time of your visit"))
+    datetime = models.DateTimeField(help_text=_("Choose the date and time of your visit"))
