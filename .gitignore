@@ -1,5 +1,5 @@
-.venv
-venv
-db.*
-.idea
-__pycache__
+/booking/templates/vehicle_details.html
+/booking/templates/edit-vehicle.html
+/booking/static/
+/media/
+/booking/
