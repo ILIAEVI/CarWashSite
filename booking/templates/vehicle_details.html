@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Wash Site</title>
+    <link rel="stylesheet" type="text/css" href="{% static "vehicle_details.css" %}" />
+</head>
+<body>
+<div class="container">
+    <div class="car-wash-boxes">
+        <div class="car-wash-box">
+            <p>Nickname: {{ vehicle.nickname }}</p>
+            <p>Brand: {{ vehicle.brand }}</p>
+            <p>Body Shape: {{ vehicle.body_shape }}</p>
+            <p>Model: {{ vehicle.model }}</p>
+            <p>License: {{ vehicle.license_plate }}</p>
+            {% if vehicle_booking %}
+                <p>Booking: {{ vehicle_booking }}</p>
+            {% else %}
+                <li>No bookings for this car</li>
+            {% endif %}
+            <a href="{% url 'edit_vehicle' vehicle.id %}" class="submit">Edit</a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+{% endblock start %}

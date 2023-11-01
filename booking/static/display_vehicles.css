@@ -1,0 +1,148 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    width: 80%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.add-button {
+    position: fixed;
+    top: 60px;
+    right: 30px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    transition: background-color 0.3s, transform 0.3s;
+    outline: none;
+}
+
+.add-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+
+.add-button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+
+.car-wash-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.car-wash-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    box-sizing: border-box;
+    margin: 10px;
+    width: 300px;
+    position: relative;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.car-wash-box:hover {
+    transform: scale(1.05);
+}
+
+.car-wash-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.car-wash-box a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.car-info p{
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    margin-top: -10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.buttons button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    text-align: center;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttons button:hover {
+    background-color: #0056b3;
+}
+
+.buttons a{
+    background-color: #007BFF;
+    display: block;
+    text-align: center;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-weight: unset;
+    margin: 5px 5px;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttons a:hover {
+    background-color: #0056b3;
+}
+
+.buttons form{
+    margin: -10px;
+}
