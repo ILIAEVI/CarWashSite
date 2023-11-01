@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from booking.models import Booking, CreateVehicle
+from booking.models import Booking, Vehicle
 
 
 class DateTimeInput(forms.DateTimeInput):
@@ -8,7 +8,7 @@ class DateTimeInput(forms.DateTimeInput):
 
 
 class BookingForm(ModelForm):
-    vehicle = forms.ModelChoiceField(queryset=CreateVehicle.objects.all(), empty_label="Select your Vehicle")
+    vehicle = forms.ModelChoiceField(queryset=Vehicle.objects.all(), empty_label="Select your Vehicle")
 
     class Meta:
         model = Booking
@@ -19,10 +19,27 @@ class BookingForm(ModelForm):
 
     def __init__(self, user, *args, **kwargs):
         super(BookingForm, self).__init__(*args, **kwargs)
-        self.fields['vehicle'].queryset = CreateVehicle.objects.filter(user=user)
+        self.fields['vehicle'].queryset = Vehicle.objects.filter(user=user)
 
 
-class CreateVehicleForm(ModelForm):
+class VehicleForm(ModelForm):
+
     class Meta:
-        model = CreateVehicle
-        fields = ["brand", "body_shape", "model", "license_plate"]
+        model = Vehicle
+        fields = ["nickname", "brand", "body_shape", "model", "license_plate", "image"]
+
+
+'''
+
+class VehicleDisplayForm(ModelForm):
+    vehicle = forms.ModelChoiceField(queryset=Vehicle.objects.all(), empty_label="Select your Vehicle")
+
+    class Meta:
+        model = Booking
+        fields = ['vehicle']
+
+    def __init__(self, user, *args, **kwargs):
+        super(VehicleDisplayForm, self).__init__(*args, **kwargs)
+        self.fields['vehicle'].queryset = Vehicle.objects.filter(user=user)
+
+'''

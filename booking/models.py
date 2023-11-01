@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+import uuid
 
 # Create your models here.
 
-class CreateVehicle(models.Model):
+
+class Vehicle(models.Model):
 
     class BodyShapeChoices(models.TextChoices):
         SUV = "suv", _("S-U-V")
@@ -14,7 +15,10 @@ class CreateVehicle(models.Model):
         VAN_MINIBUS = "van_minibus", _("VAN/Minibus")
         TRANSPORTER = "transporter", _("Transporter")
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    nickname = models.CharField(max_length=255, unique=True, help_text=_("Enter Your Car's nickname"))
     brand = models.CharField(max_length=255, help_text=_("Enter Brand name"))
     body_shape = models.CharField(
         max_length=255,
@@ -27,7 +31,7 @@ class CreateVehicle(models.Model):
     license_plate = models.CharField(max_length=7, help_text=_("Enter your car's license plate. EX:(HQ327QH)"))
 
     def __str__(self):
-        return "Brand: " + self.brand + " | License: " + self.license_plate
+        return f"Name: {self.nickname} | Brand: {self.brand}, | License: {self.license_plate}"
 
 
 class Booking(models.Model):
@@ -40,7 +44,7 @@ class Booking(models.Model):
         BODY_WASH = "body_wash", _("Body Shampooing and Washing")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    vehicle = models.ForeignKey(CreateVehicle, on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     service = models.CharField(
         max_length=255,
         choices=CarWashServiceChoices.choices,
@@ -49,3 +53,6 @@ class Booking(models.Model):
 
     )
     datetime = models.DateTimeField(help_text=_("Choose the date and time of your visit"))
+
+    def __str__(self):
+        return str(self.datetime)

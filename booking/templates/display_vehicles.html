@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Wash Site</title>
+    <link rel="stylesheet" type="text/css" href="{% static "display_vehicles.css" %}" />
+</head>
+<body>
+<div class="container">
+    <a href="{% url 'add_vehicle' %}" class="add-button">Add Vehicle</a>
+    <div class="car-wash-boxes">
+        {% for vehicle in vehicles %}
+            <div class="car-wash-box" type="hidden">
+                <div class="car-info">
+                    <p>{{ vehicle.nickname }}</p>
+                </div>
+                {% if vehicle.image %}
+                    <img alt="{{ vehicle.nickname }}" src="{{ vehicle.image.url }}">
+                {% else %}
+                    <img alt="{{ vehicle.nickname }}" src="{% static 'img/default.jpg' %}">
+                {% endif %}
+                <div class="buttons">
+                    <a href="{% url 'vehicle_details' vehicle.id %}" class="detail-view-button">Details</a>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="vehicle_id" value="{{ vehicle.id }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    const carWashBoxes = document.querySelector('.car-wash-boxes');
+    // Add a new car-wash-box container when the page loads
+    const existingCarWashBoxes = carWashBoxes.querySelectorAll('.car-wash-box');
+    if (existingCarWashBoxes.length === 0) {
+        const newCarWashBox = document.createElement('div');
+        newCarWashBox.classList.add('car-wash-box');
+        carWashBoxes.appendChild(newCarWashBox);
+    }
+
+</script>
+
+</body>
+</html>
+{% endblock start %}

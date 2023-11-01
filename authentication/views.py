@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import SignupForm
+from authentication.forms import SignupForm
 
 
 def index(request):
@@ -14,7 +14,6 @@ def user_signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f"Your account has been created!, You are now able to log in")
             return redirect('login')
     else:
         form = SignupForm()
@@ -28,10 +27,9 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, f"Successfully logged in")
             return redirect('home')
         else:
-            messages.info(request, f'Invalid Password or username, try again')
+            request.session['invalid_login'] = "Invalid Password or username, try again"
             return redirect('login')
     else:
         form = AuthenticationForm
