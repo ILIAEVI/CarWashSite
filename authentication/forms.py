@@ -11,3 +11,10 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+
+    def clean_email(self):
+        current_email = self.cleaned_data.get('email')
+        if User.objects.filter(email=current_email).exists():
+            raise forms.ValidationError("This email address is already used")
+        return current_email
+
